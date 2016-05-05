@@ -1,9 +1,9 @@
 'use strict'
 
 function Wait(interval, beforeTime, afterTime){
-  interval && this.every(interval);
-  beforeTime && this.before(beforeTime);
-  afterTime && this.after(afterTime);
+  this.every(interval);
+  this.before(beforeTime);
+  this.after(afterTime | 0);
 }
 
 Wait.prototype = {
@@ -42,7 +42,7 @@ Wait.prototype = {
           if(Date.now() >= self.expires){
             clearInterval(timer);
             if(err !== undefined || res === false){
-              reject(err || new Error('time out'));
+              reject(err || new Error('check failed'));
             }else{
               resolve(res);
             }
@@ -56,22 +56,18 @@ Wait.prototype = {
         }
       }
 
-      if(afterTime){
-        setTimeout(function(){
-          if(!f()){
-            timer = setInterval(f, interval);
-          }
-        }, afterTime);
-      }else{
-        timer = setInterval(f, interval);
-      }
+      setTimeout(function(){
+        if(!f()){
+          timer = setInterval(f, interval);
+        }
+      }, afterTime);
     });
   }
 };
 
 module.exports = {
-  every: function(interval, time){
-    return new Wait(interval, time);
+  every: function(interval){
+    return new Wait(interval, Infinity);
   },
   before: function(time){
     return new Wait(100, time);
@@ -84,5 +80,8 @@ module.exports = {
   },
   until: function(cond){
     return (new Wait(100, Infinity)).until(cond);
+  },
+  check: function(cond){
+    return (new Wait(100, 0)).until(cond);
   }
 };

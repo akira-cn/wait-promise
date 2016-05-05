@@ -105,7 +105,7 @@ describe('wait-promise', function(){
     it('await sleep', async function(){
       let t = Date.now();
       await sleep(500);
-      expect(Date.now() - t).to.be.above(499);
+      expect(Date.now() - t).to.be.above(480);
     });
 
     it('await before until', async function(){
@@ -114,7 +114,7 @@ describe('wait-promise', function(){
         await every(10).before(100).until(() => ++i > 20);
       }
       return test().catch((e) => {
-        expect(e.message).to.equal('time out');
+        expect(e.message).to.equal('check failed');
       });
     });
   });
