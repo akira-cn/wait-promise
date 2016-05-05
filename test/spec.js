@@ -17,6 +17,15 @@ describe('wait-promise', function(){
       expect(wait).to.be.a('object');
     });
 
+    it('wait check', function(){
+      let i = 0;
+      let p = wait.check(function(){
+        expect(i).to.equal(1);
+      });
+      i++;
+      return p;
+    });
+
     it('wait after', function(){
       let i = 0;
       setTimeout(function(){
@@ -76,7 +85,7 @@ describe('wait-promise', function(){
         return i > 10;
       }).then(function(){
         clearInterval(timer);
-        expect(i).to.above(40);
+        expect(i).to.above(30);
       });
     });
 
@@ -96,7 +105,7 @@ describe('wait-promise', function(){
 
   describe('async cases', function(){
     this.timeout(5000);
-    let {until, sleep, every, before, after} = require('../src/wait-promise');   
+    let {until, sleep, every, before, after} = wait;   
   
     it('await until', async function(){
       let i = 0;
