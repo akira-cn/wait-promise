@@ -1,0 +1,36 @@
+{
+  "name": "wait-until",
+  "version": "0.1.0",
+  "description": "Make a promise, waiting for a specified amount of time, util something is done.",
+  "main": "src/wait-until.js",
+  "scripts": {
+    "test": "babel --presets es2015-loose,stage-1 --plugins transform-runtime test/ --out-dir test-app/ && mocha test-app/",
+    "test-cov": "babel --presets es2015-loose,stage-1 --plugins transform-runtime test/ --out-dir test-app/ && node_modules/jscover/bin/jscover src test-cov && node_modules/jscover/bin/jscover test-app test-cov && mocha test-cov --reporter=mocha-lcov-reporter > test-cov/coverage.lcov",
+    "prepublish": "rm -rf dist && mkdir -p dist && npm run build-dev && npm run build-prod",
+    "build-dev": "browserify --standalone CoreWrappers src/wait-until.js > dist/wait-until.js",
+    "build-prod": "browserify --standalone CoreWrappers src/wait-until.js | uglifyjs -cm > dist/wait-until.min.js"
+  },
+  "keywords": [
+    "promise",
+    "node",
+    "wait",
+    "until",
+    "async"
+  ],
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "uglify-js": "^2.6.2",
+    "request": "*",
+    "mocha": "^2.3.4",
+    "mocha-lcov-reporter": "^1.2.0",
+    "jscover": "^1.0.0",
+    "chai": "^3.4.1",
+    "babel-cli": "6.x.x",
+    "babel-runtime": "6.x.x",
+    "babel-preset-es2015-loose": "6.x.x",
+    "babel-preset-stage-1": "6.x.x",
+    "babel-plugin-transform-runtime": "6.x.x"
+  },
+  "author": "akira-cn",
+  "license": "MIT"
+}
