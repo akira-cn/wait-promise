@@ -1,5 +1,9 @@
 # wait-promise
 
+[![npm status](https://img.shields.io/npm/v/wait-promise.svg)](https://www.npmjs.org/package/wait-promise)
+[![build status](https://api.travis-ci.org/akira-cn/wait-promise.svg?branch=master)](https://travis-ci.org/akira-cn/wait-promise) 
+[![dependency status](https://david-dm.org/akira-cn/wait-promise.svg)](https://david-dm.org/akira-cn/wait-promise) 
+
 Syntactic sugar for setTimeout and setInterval. Based on [ES6 Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 ## Use it in nodeJS
