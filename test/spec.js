@@ -28,7 +28,7 @@ describe('wait-promise', function(){
         i++;
       }, 50);
       return wait.until(function(){
-        if(i >= 10) {clearInterval(timer)};
+        if(i > 10) {clearInterval(timer)};
         expect(i).to.be.above(10);
       });
     });
