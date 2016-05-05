@@ -45,7 +45,7 @@ promise.then(function(){
 
 **wait.check(condition)** always returns a promise. If **condition** throws error or returns `false` value explicitly, the promise will be rejected.
 
-```
+```js
 let i = 1;
 let promise = wait.check(function(){
   return i < 1;
@@ -61,7 +61,7 @@ promise.catch(function(err){
 
 Check condition async and re-check every 100ms until it neighter throws error nor returns `false`.
 
-```
+```js
 let i = 0;
 let promise = wait.until(function(){
 	return ++i >= 10;
@@ -90,7 +90,7 @@ async function foo(){
 
 Check condition in `millisec`. If time out, the promise will be rejected.
 
-```
+```js
 let i = 0;
 let promise = wait.before(200).until(function(){
 	return ++i >= 10;
@@ -106,7 +106,7 @@ promise.catch(function(err){
 
 Check condition after `millisec`.
 
-```
+```js
 let i = 1;
 setTimeout(function(){
 	++i;
@@ -138,7 +138,7 @@ promise.then(function(){
 
 Do nothing but sleep `millisec`
 
-```
+```js
 var promise = wait.sleep(200);
 promise.then(function(){
 	//do sth.
@@ -147,7 +147,7 @@ promise.then(function(){
 
 **With async/await**
 
-```
+```js
 let sleep = wait.sleep;
 
 async function foo(){
