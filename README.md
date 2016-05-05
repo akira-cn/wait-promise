@@ -15,7 +15,7 @@ npm install wait-promise
 **wait-promise CDN**
 
 ```html
-<script src="https://s5.ssl.qhimg.com/!20348b65/wait-promise.min.js"></script>
+<script src="https://s5.ssl.qhimg.com/!be02d20e/wait-promise.min.js"></script>
 ```
 
 You can use it with any AMD loader or **standalone**
