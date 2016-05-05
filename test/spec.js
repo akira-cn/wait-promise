@@ -2,10 +2,16 @@
 
 var expect = require('chai').expect;
 
+let wait;
+try{
+  wait = require('../test-cov/wait-promise');
+}catch(ex){
+  wait = require('../src/wait-promise');
+}
+
 describe('wait-promise', function(){
   describe('normal cases', function(){
     this.timeout(5000);
-    let wait = require('../src/wait-promise');
 
     it('wait object', function(){
       expect(wait).to.be.a('object');
