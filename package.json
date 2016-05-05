@@ -1,19 +1,22 @@
 {
-  "name": "wait-until",
+  "name": "wait-promise",
   "version": "0.1.0",
   "description": "Make a promise, waiting for a specified amount of time, util something is done.",
-  "main": "src/wait-until.js",
+  "main": "src/wait-promise.js",
   "scripts": {
     "test": "babel --presets es2015-loose,stage-1 --plugins transform-runtime test/ --out-dir test-app/ && mocha test-app/",
     "test-cov": "babel --presets es2015-loose,stage-1 --plugins transform-runtime test/ --out-dir test-app/ && node_modules/jscover/bin/jscover src test-cov && node_modules/jscover/bin/jscover test-app test-cov && mocha test-cov --reporter=mocha-lcov-reporter > test-cov/coverage.lcov",
     "prepublish": "rm -rf dist && mkdir -p dist && npm run build-dev && npm run build-prod",
-    "build-dev": "browserify --standalone CoreWrappers src/wait-until.js > dist/wait-until.js",
-    "build-prod": "browserify --standalone CoreWrappers src/wait-until.js | uglifyjs -cm > dist/wait-until.min.js"
+    "build-dev": "browserify --standalone wait src/wait-promise.js > dist/wait-promise.js",
+    "build-prod": "browserify --standalone wait src/wait-promise.js | uglifyjs -cm > dist/wait-promise.min.js"
   },
   "keywords": [
     "promise",
     "node",
     "wait",
+    "before",
+    "after",
+    "every",
     "until",
     "async"
   ],

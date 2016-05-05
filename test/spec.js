@@ -2,10 +2,10 @@
 
 var expect = require('chai').expect;
 
-describe('wait-until', function(){
+describe('wait-promise', function(){
   describe('normal cases', function(){
     this.timeout(5000);
-    let wait = require('../src/wait-until');
+    let wait = require('../src/wait-promise');
 
     it('wait object', function(){
       expect(wait).to.be.a('object');
@@ -90,7 +90,7 @@ describe('wait-until', function(){
 
   describe('async cases', function(){
     this.timeout(5000);
-    let {until, sleep, every, before, after} = require('../src/wait-until');   
+    let {until, sleep, every, before, after} = require('../src/wait-promise');   
   
     it('await until', async function(){
       let i = 0;
