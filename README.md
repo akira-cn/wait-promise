@@ -20,7 +20,7 @@ npm install wait-promise
 **wait-promise CDN**
 
 ```html
-<script src="https://s5.ssl.qhimg.com/!be02d20e/wait-promise.min.js"></script>
+<script src="https://s5.ssl.qhimg.com/!0451677a/wait-promise.min.js"></script>
 ```
 
 You can use it with any AMD loader or **standalone**
@@ -41,8 +41,10 @@ promise.then(function(){
 
 * [check](#check)
 * [until](#until)
+* [till](#till)
 * [before](#before)
 * [after](#after)
+* [limit](#limit)
 * [every](#every)
 * [sleep](#sleep)
 
@@ -89,6 +91,22 @@ async function foo(){
 }
 ```
 
+### till
+
+**wait.till(condition)**
+
+Check condition async and re-check every 100ms till it **explicitly** returns `true`. If condition throws error, the promise will be rejected.
+
+```js
+let i = 0;
+let promise = wait.till(function(){
+  return ++i >= 10;
+});
+promise.then(function(){
+  console.log(i); //i will be 10
+});
+```
+
 ### before
 
 **wait.before(millisec).until(condition)**
@@ -121,9 +139,24 @@ let promise = wait.after(1000).check(function(){
 });
 ```
 
+### limit
+
+Check condition with limit times. If exceed the limit, the promise will be rejected.
+
+```js
+let i = 0;
+let p = wait.limit(10).until(function(){
+  i++;
+  return false;
+});
+return p.catch(function(){
+  console.log(i); //i will be 10
+});
+```
+
 ### every
 
-**wait.every(millisec).until(condition)**
+**wait.every(millisec[,limit]).until(condition)**
 
 Change time interval from 100ms to `millisec`。
 
@@ -134,6 +167,20 @@ let promise = wait.every(10).before(200).until(function(){
 });
 promise.then(function(){
 	console.log(i) // i will be 10
+});
+```
+
+**every with limit**
+
+`wait.every(1, 10)` is equal to `wait.every(1).limit(10)` 
+
+```js
+let i = 0;
+let p = wait.every(1, 10).till(function(){
+  return ++i >= 10;
+});
+p.catch(function(){
+  console.log(i); //i will be 10
 });
 ```
 

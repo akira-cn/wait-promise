@@ -42,9 +42,35 @@ describe('wait-promise', function(){
       let timer = setInterval(function(){
         i++;
       }, 50);
-      return wait.until(function(){
-        if(i > 10) {clearInterval(timer)};
+      let p = wait.until(function(){
         expect(i).to.be.above(10);
+      });
+      return p.then(function(){
+        clearInterval(timer);
+        expect(i).to.be.above(10);
+      });
+    });
+
+    it('wait till', function(){
+      let i = 0;
+      let timer = setInterval(function(){
+        i++;
+      }, 50);
+      return wait.till(function(){
+        return i >= 10;
+      }).then(function(){
+        expect(i).to.be.above(10);
+      });
+    });
+
+    it('wait till throws error', function(){
+      let i = 0;
+
+      return wait.till(function(){
+        expect(i).to.equal(1);
+      }).catch(function(err){
+        expect(err.message).to.be.a('string');
+        expect(i).to.equal(0);
       });
     });
 
@@ -87,6 +113,47 @@ describe('wait-promise', function(){
         clearInterval(timer);
         expect(i).to.above(30);
       });
+    });
+
+    it('wait limit until', function(){
+      let i = 0;
+      let p = wait.limit(10).until(function(){
+        i++;
+        return false;
+      });
+      return p.catch(function(){
+        expect(i).to.equal(10);
+      });
+    });
+
+    it('wait limit till', function(){
+      let i = 0;
+      let p = wait.limit(10).till(function(){
+        return ++i >= 20;
+      });
+      return p.catch(function(){
+        expect(i).to.equal(10);
+      });      
+    });
+
+    it('wait every with limit', function(){
+      let i = 0;
+      let p = wait.every(1, 10).till(function(){
+        return ++i >= 20;
+      });
+      return p.catch(function(){
+        expect(i).to.equal(10);
+      })
+    });
+
+    it('wait every limit', function(){
+      let i = 0;
+      let p = wait.every(1).limit(10).till(function(){
+        return ++i >= 20;
+      });
+      return p.catch(function(){
+        expect(i).to.equal(10);
+      })
     });
 
     it('wait after check', function(){

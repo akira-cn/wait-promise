@@ -1,6 +1,6 @@
 {
   "name": "wait-promise",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Make a promise, waiting for a specified amount of time, util something is done.",
   "main": "src/wait-promise.js",
   "scripts": {

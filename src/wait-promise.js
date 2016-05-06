@@ -1,7 +1,7 @@
 'use strict'
 
-function Wait(interval, beforeTime, afterTime){
-  this.every(interval);
+function Wait(interval, beforeTime, afterTime, limit){
+  this.every(interval, limit);
   this.before(beforeTime);
   this.after(afterTime | 0);
 }
@@ -16,30 +16,51 @@ Wait.prototype = {
     this.afterTime = time;
     return this;
   },
-  every: function(interval){
+  every: function(interval, limit){
     this.interval = interval;
+    if(limit != null) this.limit(limit);
+    return this;
+  },
+  limit: function(limit){
+    limit = limit > 0 ? limit : Infinity;
+    this.limit = limit;
     return this;
   },
   check: function(cond){
     cond = cond || function(){};
     return this.before(0).until(cond);
   },
+  till: function(cond){
+    var self = this;
+    return this.until(function(){
+      var res;
+      try{
+        res = cond();
+        return res === true;
+      }catch(ex){
+        self.limit = 0; //force error
+        throw ex;
+      }
+    });
+  }, 
   until: function(cond){
     var interval = this.interval,
         afterTime = this.afterTime,
         self = this;
 
-    var timer;
+    var timer, called = 0;
 
     return new Promise(function(resolve, reject){
       function f(){
         var err, res;
+        called++;
+        
         try{
           res = cond();
         }catch(ex){
           err = ex;
         }finally{
-          if(Date.now() >= self.expires){
+          if(Date.now() >= self.expires || called >= self.limit){
             clearInterval(timer);
             if(err !== undefined || res === false){
               reject(err || new Error('check failed'));
@@ -66,11 +87,14 @@ Wait.prototype = {
 };
 
 module.exports = {
-  every: function(interval){
-    return new Wait(interval, Infinity);
+  every: function(interval, limit){
+    return new Wait(interval, Infinity, 0, limit);
   },
-  before: function(time){
-    return new Wait(100, time);
+  limit: function(limit){
+    return new Wait(100, Infinity, 0, limit);
+  },
+  before: function(time, limit){
+    return new Wait(100, time, 0, limit);
   },
   after: function(time){
     return new Wait(100, Infinity, time);
@@ -80,6 +104,9 @@ module.exports = {
   },
   until: function(cond){
     return (new Wait(100, Infinity)).until(cond);
+  },
+  till: function(cond){
+    return (new Wait(100, Infinity)).till(cond);
   },
   check: function(cond){
     return (new Wait(100, 0)).until(cond);
