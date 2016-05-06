@@ -15,6 +15,18 @@ A version compiled to ES5 in CJS format is published to npm as wait-promise.
 npm install wait-promise
 ```
 
+in ES5:
+
+```js
+var wait = require('wait-promise');
+```
+
+in ES6/7:
+
+```js
+import {check, until, till, before, after, limit, every, sleep} from 'wait-promise';
+```
+
 ## Use it on browser
 
 **wait-promise CDN**
