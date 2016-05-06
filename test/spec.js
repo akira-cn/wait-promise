@@ -57,7 +57,7 @@ describe('wait-promise', function(){
         i++;
       }, 50);
       return wait.till(function(){
-        return i >= 10;
+        return i > 10;
       }).then(function(){
         expect(i).to.be.above(10);
       });
