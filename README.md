@@ -5,7 +5,7 @@
 [![dependency status](https://david-dm.org/akira-cn/wait-promise.svg)](https://david-dm.org/akira-cn/wait-promise) 
 [![coverage status](https://img.shields.io/coveralls/akira-cn/wait-promise.svg)](https://coveralls.io/github/akira-cn/wait-promise)
 
-Syntactic sugar for setTimeout and setInterval. Based on [ES6 Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+Make a promise, waiting for a specified amount of time, util something is done. Syntactic sugar for setTimeout and setInterval. Based on [ES6 Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 ## Use it in nodeJS
 
