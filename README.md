@@ -32,7 +32,7 @@ import {check, until, till, before, after, limit, every, sleep} from 'wait-promi
 **wait-promise CDN**
 
 ```html
-<script src="https://s5.ssl.qhimg.com/!0451677a/wait-promise.min.js"></script>
+<script src="https://s5.ssl.qhimg.com/!e29d1180/wait-promise.min.js"></script>
 ```
 
 You can use it with any AMD loader or **standalone**
