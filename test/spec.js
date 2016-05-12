@@ -183,7 +183,12 @@ describe('wait-promise', function(){
       await every(10).until(() => ++i >= 50);
       expect(i).to.equal(50);
     });
-
+    it('wait every routine until', async function(){
+      let i = 0, j = 0;
+      await wait.and(() => j++).until(() => j >= 3);
+      await wait.every(50).and(() => i++).until(()=> i >= 5);
+      expect(i + j).to.equal(8);
+    });
     it('await sleep', async function(){
       let t = Date.now();
       await sleep(500);

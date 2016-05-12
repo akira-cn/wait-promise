@@ -12,6 +12,10 @@ Wait.prototype = {
     this.expires = this.startTime + time;
     return this;
   },
+  and: function(func){
+    this.routine = func;
+    return this;
+  },
   after: function(time){
     this.afterTime = time;
     return this;
@@ -46,6 +50,7 @@ Wait.prototype = {
   until: function(cond){
     var interval = this.interval,
         afterTime = this.afterTime,
+        routine = this.routine,
         self = this;
 
     var timer, called = 0;
@@ -54,7 +59,8 @@ Wait.prototype = {
       function f(){
         var err, res;
         called++;
-        
+        routine && routine();
+
         try{
           res = cond();
         }catch(ex){
@@ -89,6 +95,9 @@ Wait.prototype = {
 module.exports = {
   every: function(interval, limit){
     return new Wait(interval, Infinity, 0, limit);
+  },
+  and: function(func){
+    return new Wait(100, Infinity, 0).and(func);
   },
   limit: function(limit){
     return new Wait(100, Infinity, 0, limit);

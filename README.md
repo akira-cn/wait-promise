@@ -58,6 +58,7 @@ promise.then(function(){
 * [after](#after)
 * [limit](#limit)
 * [every](#every)
+* [and](#and)
 * [sleep](#sleep)
 
 ### check
@@ -194,6 +195,21 @@ let p = wait.every(1, 10).till(function(){
 p.catch(function(){
   console.log(i); //i will be 10
 });
+```
+
+### end
+
+`wait.every(millisec).and(func).until(condition)`
+
+Check every millisec time **and do something** before checking condition.
+
+```js
+async function foo(){
+  let i = 0, j = 0;
+  await wait.and(() => j++).until(() => j >= 3);
+  await wait.every(50).and(() => i++).until(()=> i >= 5);
+  console.log(i + j); //will be 8
+}
 ```
 
 ### sleep
