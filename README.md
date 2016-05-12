@@ -197,7 +197,7 @@ p.catch(function(){
 });
 ```
 
-### end
+### and
 
 `wait.every(millisec).and(func).until(condition)`
 
