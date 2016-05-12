@@ -206,8 +206,8 @@ Check every millisec time **and do something** before checking condition.
 ```js
 async function foo(){
   let i = 0, j = 0;
-  await wait.and(() => j++).until(() => j >= 3);
-  await wait.every(50).and(() => i++).until(()=> i >= 5);
+  await and(() => j++).until(() => j >= 3);
+  await every(50).and(() => i++).until(()=> i >= 5);
   console.log(i + j); //will be 8
 }
 ```

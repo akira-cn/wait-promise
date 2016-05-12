@@ -172,7 +172,7 @@ describe('wait-promise', function(){
 
   describe('async cases', function(){
     this.timeout(5000);
-    let {until, sleep, every, before, after} = wait;   
+    let {until, sleep, every, and, before, after} = wait;   
   
     it('await until', async function(){
       let i = 0;
@@ -185,8 +185,8 @@ describe('wait-promise', function(){
     });
     it('wait every routine until', async function(){
       let i = 0, j = 0;
-      await wait.and(() => j++).until(() => j >= 3);
-      await wait.every(50).and(() => i++).until(()=> i >= 5);
+      await and(() => j++).until(() => j >= 3);
+      await every(50).and(() => i++).until(()=> i >= 5);
       expect(i + j).to.equal(8);
     });
     it('await sleep', async function(){
