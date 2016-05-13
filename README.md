@@ -24,7 +24,7 @@ var wait = require('wait-promise');
 in ES6/7:
 
 ```js
-import {check, until, till, before, after, limit, every, sleep} from 'wait-promise';
+import {check, until, till, before, after, limit, every, and, sleep} from 'wait-promise';
 ```
 
 ## Use it on browser
