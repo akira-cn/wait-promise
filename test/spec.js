@@ -136,6 +136,17 @@ describe('wait-promise', function(){
       });      
     });
 
+    it('wait limit and forward', function(){
+      var sum = 0;
+      let p = wait.limit(10).and(function(i){
+        sum += i;
+      }).forward();
+
+      return p.catch(function(){
+        expect(sum).to.equal(45);
+      });
+    });
+
     it('wait every with limit', function(){
       let i = 0;
       let p = wait.every(1, 10).till(function(){

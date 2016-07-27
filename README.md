@@ -59,6 +59,7 @@ promise.then(function(){
 * [limit](#limit)
 * [every](#every)
 * [and](#and)
+* [forward](#forward)
 * [sleep](#sleep)
 
 ### check
@@ -211,6 +212,12 @@ async function foo(){
   console.log(i + j); //will be 8
 }
 ```
+
+### forward
+
+`wait.every(millisec).and(func).forward()`
+
+The syntax sugger for until(()=>false).
 
 ### sleep
 
