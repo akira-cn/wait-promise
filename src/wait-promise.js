@@ -34,6 +34,10 @@ Wait.prototype = {
     cond = cond || function(){};
     return this.before(0).until(cond);
   },
+  forward: function(){
+    var self = this;
+    return this.until(function(){return false});
+  },
   till: function(cond){
     var self = this;
     return this.until(function(){
@@ -58,8 +62,8 @@ Wait.prototype = {
     return new Promise(function(resolve, reject){
       function f(){
         var err, res;
+        routine && routine(called);
         called++;
-        routine && routine();
 
         try{
           res = cond();
@@ -113,6 +117,9 @@ module.exports = {
   },
   until: function(cond){
     return (new Wait(100, Infinity)).until(cond);
+  },
+  forward: function(){
+    return (new Wait(100, Infinity)).forward();
   },
   till: function(cond){
     return (new Wait(100, Infinity)).till(cond);
