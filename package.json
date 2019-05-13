@@ -37,5 +37,6 @@
     "babel-plugin-transform-coverage": "^0.1.5"
   },
   "author": "akira-cn",
+  "repository": "akira-cn/wait-promise",
   "license": "MIT"
 }
